@@ -1,14 +1,14 @@
 <section className="album-covers container clearfix">
   <div className="collection-album-container column fourth">
-     <Link to={`album/${this.props.index}`}>
+     <a ui-sref="album.detail({ id: 1 })">
        <div className="image-container">
-          <img src={require(`./../${album.albumArtUrl}`)} alt="Album Cover Art" />
-          <div className="label">  {album.songs.length}   songs</div>
+          <img ng-src={{album.albumCoverArt}} alt="Album Cover Art" />
+          <div className="label">  {{album.songs.length}}   songs</div>
        </div>
        <p className="caption">
-         <span className="album-name">  {album.title}  </span>
-         <br/>  {album.artist}
+         <span className="album-name">  {{album.title}}  </span>
+         <br/>  {{album.artist}}
        </p>
-     </Link>
+     </a>
    </div>
 </section>
