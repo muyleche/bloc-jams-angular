@@ -1,4 +1,5 @@
 <main class="album-view container narrow">
+<<<<<<< HEAD
    <section class="clearfix">
      <div class="column half">
        <img src="/assets/images/album_covers/01.png" class="album-cover-art">
@@ -17,3 +18,79 @@
      </tr>
    </table>
  </main>
+=======
+  <section class="clearfix">
+    <div class="column half">
+      <img src="{{AlbumCtrl.album.albumArtUrl}}" class="album-cover-art">
+    </div>
+    <div class="album-view-details column half">
+      <h2 class="album-view-title">{{AlbumCtrl.album.title}}</h2>
+      <h3 class="album-view-artist">{{AlbumCtrl.album.artist}}</h3>
+      <h5 class="album-view-release-info">{{AlbumCtrl.album.label}}</h5>
+    </div>
+  </section>
+  <table class="album-view-song-list">
+    <thead>
+      <tr>
+        <td class="song-item-number">#</td>
+        <td class="song-item-title">Title</td>
+        <td class="song-item-duration">Length</td>
+        <td class="song-item-play-count">Plays</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="song in AlbumCtrl.album.songs" ng-class="{'playing': (AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing), 'selected': AlbumCtrl.currentSongIndex === $index}" class="album-view-song-item" data-song-index="{{$index}}">
+        <td class="song-item-number" data-song-number="{{$index+1}}">
+          <button class="album-song-button clear-style" ng-class="AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing ? 'ion-stop' : 'ion-play'" ng-click="AlbumCtrl.selectSong($event)"></button>
+        </td>
+        <td class="song-item-title">
+          {{song.title}}
+          <div class="sound-bars">
+            <div class="bar bar1"></div>
+            <div class="bar bar2"></div>
+            <div class="bar bar3"></div>
+            <div class="bar bar4"></div>
+          </div>
+        </td>
+        <td class="song-item-duration">{{song.duration}}</td>
+        <td class="song-item-play-count">{{song.playCount}}</td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+<section class="player-bar">
+  <div class="container">
+    <div class="control-group main-controls">
+      <a class="previous">
+        <span class="ion-skip-backward"></span>
+      </a>
+      <a class="play-pause">
+        <span class="ion-play"></span>
+      </a>
+      <a class="next">
+        <span class="ion-skip-forward"></span>
+      </a>
+    </div>
+    <div class="control-group currently-playing">
+      <h2 class="song-name">My dumb song</h2>
+      <div class="seek-control">
+        <div class="seek-bar">
+          <div class="fill"></div>
+          <div class="thumb"></div>
+        </div>
+        <div class="current-time">2:30</div>
+        <div class="total-time">4:45</div>
+      </div>
+      <h2 class="artist-song-mobile">My dumb song - Fallout Boy</h2>
+      <h3 class="artist-name">Fallout Boy</h3>
+    </div>
+    <div class="control-group volume">
+      <span class="ion-volume-high icon"></span>
+      <div class="seek-bar">
+        <div class="fill"></div>
+        <div class="thumb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+>>>>>>> assignment-3-ng-routing
