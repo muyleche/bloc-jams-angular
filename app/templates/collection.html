@@ -1,12 +1,12 @@
-<section className="album-covers container clearfix">
-  <div className="collection-album-container column fourth">
-     <a ui-sref="album.detail({ id: 1 })">
-       <div className="image-container">
-          <img ng-src={{album.albumCoverArt}} alt="Album Cover Art" />
-          <div className="label">  {{album.songs.length}}   songs</div>
+<section class="album-covers container clearfix">
+  <div class="collection-album-container column fourth" ng-repeat="album in CollectionCtrl.albums">
+     <a ui-sref="album({ id: {{$index}} })">
+       <div class="image-container">
+          <img ng-src="{{album.albumArtUrl}}" alt="Album Cover Art" />
+          <div class="label">  {{album.songs.length}}   songs</div>
        </div>
-       <p className="caption">
-         <span className="album-name">  {{album.title}}  </span>
+       <p class="caption">
+         <span class="album-name">  {{album.title}}  </span>
          <br/>  {{album.artist}}
        </p>
      </a>
