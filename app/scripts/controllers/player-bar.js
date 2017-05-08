@@ -1,10 +1,12 @@
-class PlayerBar {
+class PlayerBarController {
   constructor($scope) {
+    console.log($scope.currentSongIndex);
     this.volume = 5;
     this.position = 0;
-    this.player = plyr.setup('.audio-player',{})[0];
-    this.player.setVolume(this.state.volume);
+    //this.player = plyr.setup('.audio-player',{})[0];
+    //this.player.setVolume(this.state.volume);
     document.addEventListener('timeupdate', this.positionUpdater);
+    this.playerBarPlayPause = this.playerBarPlayPause.bind(this);
   }
 
   playerBarPlayPause (target = document.querySelector('.play-pause'), props = this.props) {

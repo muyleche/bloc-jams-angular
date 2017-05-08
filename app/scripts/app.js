@@ -44,7 +44,19 @@
     .service('Utilities', Utilities)
     .controller('LandingController', ['Utilities', LandingController])
     .controller('CollectionController', ['AlbumService', CollectionController])
-    .controller('AlbumController', ['$stateParams', 'AlbumService', 'Utilities', '$scope', AlbumController]);
-    //.directive('Player', ['$scope', () => {new Player();}]);
+    .controller('AlbumController', ['$stateParams', 'AlbumService', 'Utilities', AlbumController])
+    .directive('playerBar', function() {
+      return {
+        restrict: 'E',
+        templateUrl: '/templates/player_bar.html',
+        controller: ['$scope', PlayerBarController]
+      };
+    })
+    .directive('audioPlayer', function() {
+      return {
+        restrict: 'A',
+        controller: ['$scope', AudioPlayer]
+      };
+    });
 
 })();

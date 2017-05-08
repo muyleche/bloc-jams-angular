@@ -1,8 +1,5 @@
 class AudioPlayer {
   constructor ($scope) {
-    this.restrict = 'E';
-    this.scope = {
-      currentSongIndex: '=currentSongIndex'
-    };
+    console.log($scope.currentSongIndex);
   }
 }

@@ -5,7 +5,7 @@ class AlbumController {
    *   @param  {AlbumService} AlbumService
    *   @param  {Utilities}    Utilities
    */
-  constructor($stateParams, AlbumService, Utilities, $scope) {
+  constructor($stateParams, AlbumService, Utilities) {
     const albumIndex = $stateParams.id;
     Object.assign(this,
       {
