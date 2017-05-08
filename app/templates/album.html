@@ -1,12 +1,12 @@
 <main class="album-view container narrow">
   <section class="clearfix">
     <div class="column half">
-      <img src="{{AlbumCtrl.album.albumArtUrl}}" class="album-cover-art">
+      <img ng-src="{{AlbumCtrl.albumArtUrl}}" class="album-cover-art">
     </div>
     <div class="album-view-details column half">
-      <h2 class="album-view-title">{{AlbumCtrl.album.title}}</h2>
-      <h3 class="album-view-artist">{{AlbumCtrl.album.artist}}</h3>
-      <h5 class="album-view-release-info">{{AlbumCtrl.album.label}}</h5>
+      <h2 class="album-view-title">{{AlbumCtrl.title}}</h2>
+      <h3 class="album-view-artist">{{AlbumCtrl.artist}}</h3>
+      <h5 class="album-view-release-info">{{AlbumCtrl.label}}</h5>
     </div>
   </section>
   <table class="album-view-song-list">
@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="song in AlbumCtrl.album.songs" ng-class="{'playing': (AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing), 'selected': AlbumCtrl.currentSongIndex === $index}" class="album-view-song-item" data-song-index="{{$index}}">
+      <tr ng-repeat="song in AlbumCtrl.songs" ng-class="{'playing': (AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing), 'selected': AlbumCtrl.currentSongIndex === $index}" class="album-view-song-item" data-song-index="{{$index}}">
         <td class="song-item-number" data-song-number="{{$index+1}}">
           <button class="album-song-button clear-style" ng-class="AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing ? 'ion-stop' : 'ion-play'" ng-click="AlbumCtrl.selectSong($event)"></button>
         </td>

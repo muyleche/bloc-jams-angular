@@ -1,18 +1,4 @@
 <section class="album-covers container clearfix">
-<<<<<<< HEAD
-  <div class="collection-album-container column fourth">
-    <a ui-sref="album">
-      <div class="image-container">
-         <img src="/assets/images/album_covers/01.png">
-         <div class="label"> X Songs</div>
-      </div>
-      <p class="caption">
-        <span class="album-name">The Colors</span>
-        <br/> Pablo Picasso
-      </p>
-    </a>
-  </div>
-=======
   <div class="collection-album-container column fourth" ng-repeat="album in CollectionCtrl.albums">
      <a ui-sref="album({ id: {{$index}} })">
        <div class="image-container">
@@ -25,5 +11,4 @@
        </p>
      </a>
    </div>
->>>>>>> assignment-3-ng-routing
 </section>

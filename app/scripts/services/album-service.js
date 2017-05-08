@@ -43,6 +43,12 @@ class AlbumService {
       ]
     }];
   }
+
+  /**
+   * Retrieve the album with the provide ID.
+   * @param  {number}     [index=null]
+   * @return {AlbumJSON}
+   */
   getAlbum(index = null) {
     if (index !== null) {
       return this.albums[index];

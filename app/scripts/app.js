@@ -1,11 +1,23 @@
 (function() {
+  /**
+   * Function for configuring the bloc-jams-angular app.
+   * @param  {stateProvider} $stateProvider     ui-router service for setting application state based on URL route.
+   * @param  {locationProvider} $locationProvider  angular service for managing browser window location (URL).
+   * @param  {urlRouterProvider} $urlRouterProvider angular service for manipulating angular app's URL routes.
+   */
   function config($stateProvider, $locationProvider, $urlRouterProvider) {
+    // hide 'hash' notation in URL.
+    // don't require the 'base' url tag in the HTML head.
     $locationProvider
       .html5Mode({
         enabled: true,
         requireBase: false
       });
+
+    // if any unanticipated URL path is provided, go to the landing page.
     $urlRouterProvider.otherwise('/');
+
+    // define routes using ui-router.
     $stateProvider
       .state('landing',{
         url: '/',
@@ -24,13 +36,15 @@
       });
   }
 
+  // define primary angular module, config, and controllers/services.
   angular
     .module('blocJams', ['ui.router'])
     .config(config)
     .service('AlbumService', AlbumService)
     .service('Utilities', Utilities)
-    .controller('LandingController', ['$scope', 'Utilities', LandingController])
-    .controller('CollectionController', ['AlbumService', '$scope', CollectionController])
-    .controller('AlbumController', ['$stateParams', 'AlbumService', '$scope', 'Utilities', AlbumController]);
+    .controller('LandingController', ['Utilities', LandingController])
+    .controller('CollectionController', ['AlbumService', CollectionController])
+    .controller('AlbumController', ['$stateParams', 'AlbumService', 'Utilities', '$scope', AlbumController]);
+    //.directive('Player', ['$scope', () => {new Player();}]);
 
 })();
