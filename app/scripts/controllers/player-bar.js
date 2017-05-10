@@ -1,15 +1,12 @@
-class PlayerBarController {
-  constructor($scope) {
-    console.log($scope.currentSongIndex);
-    this.volume = 5;
-    this.position = 0;
-    //this.player = plyr.setup('.audio-player',{})[0];
-    //this.player.setVolume(this.state.volume);
-    document.addEventListener('timeupdate', this.positionUpdater);
-    this.playerBarPlayPause = this.playerBarPlayPause.bind(this);
-  }
+function PlayerBarController($scope) {
+  //console.log($scope.currentSongIndex);
+  this.volume = 5;
+  this.position = 0;
+  //this.player = plyr.setup('.audio-player',{})[0];
+  //this.player.setVolume(this.state.volume);
+  //document.addEventListener('timeupdate', positionUpdater);
 
-  playerBarPlayPause (target = document.querySelector('.play-pause'), props = this.props) {
+  this.playerBarPlayPause = (target = document.querySelector('.play-pause'), props = this.props) => {
     if (props.playing && this.player.isPaused()) {
       this.player.play();
       utils.removeClass('ion-play', target);
@@ -22,11 +19,11 @@ class PlayerBarController {
     }
   }
 
-  positionUpdater () {
+  this.positionUpdater = () => {
     this.position = this.player.getCurrentTime();
   }
 
-  seekHandler (event) {
+  this.seekHandler = (event) => {
     this.setState({position: parseFloat(event.target.value)});
     document.removeEventListener('timeupdate', this.positionUpdater);
     if (this.seekTimer) {
@@ -41,12 +38,12 @@ class PlayerBarController {
     }, 250);
   }
 
-  volumeHandler (event) {
+  this.volumeHandler = (event) => {
     this.volume = event.target.value;
     this.player.setVolume(this.volume);
   }
 
-  updateCurrentSongInPlayer (song) {
+  this.updateCurrentSongInPlayer = (song) => {
     this.player.source({
       type: 'audio',
       title: song ? song.title : this.props.currentSong.title,
@@ -59,7 +56,7 @@ class PlayerBarController {
     this.positionUpdater();
   }
 
-  componentWillReceiveProps (nextProps) {
+  this.componentWillReceiveProps = (nextProps) => {
     // the props are about to be updated.
     // the song just changed, upate the player.
     if (nextProps.currentSong && this.props.currentSong !== nextProps.currentSong) {
@@ -70,7 +67,7 @@ class PlayerBarController {
     }
   }
 
-  componentWillUnmount () {
+  this.componentWillUnmount = () => {
     this.player.destroy();
     clearInterval(this.state.positionTimer);
     document.removeEventListener('timeupdate', this.positionUpdater);
