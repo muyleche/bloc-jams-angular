@@ -1,5 +1,5 @@
 <section class="album-covers container clearfix">
-  <div class="collection-album-container column fourth" ng-repeat="album in CollectionCtrl.albums">
+  <div class="collection-album-container column fourth" ng-repeat="album in CollectionCtrl.albums track by $index">
      <a ui-sref="album({ id: {{$index}} })">
        <div class="image-container">
           <img ng-src="{{album.albumArtUrl}}" alt="Album Cover Art" />

@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="song in AlbumCtrl.songs" ng-class="{'playing': (AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing), 'selected': AlbumCtrl.currentSongIndex === $index}" class="album-view-song-item" data-song-index="{{$index}}">
+      <tr ng-repeat="song in AlbumCtrl.songs track by $index" ng-class="{'playing': (AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing), 'selected': AlbumCtrl.currentSongIndex === $index}" class="album-view-song-item" data-song-index="{{$index}}">
         <td class="song-item-number" data-song-number="{{$index+1}}">
           <button class="album-song-button clear-style" ng-class="AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing ? 'ion-stop' : 'ion-play'" ng-click="AlbumCtrl.selectSong($event)"></button>
         </td>
