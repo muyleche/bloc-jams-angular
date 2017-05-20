@@ -40,22 +40,19 @@
   angular
     .module('blocJams', ['ui.router'])
     .config(config)
-    .service('AlbumService', AlbumService)
     .service('Utilities', Utilities)
+    .service('AlbumService', AlbumService)
+    .service('AudioService', ['Utilities', AudioService])
+    .filter('secondsToDuration', secondsToDuration)
     .controller('LandingController', ['Utilities', LandingController])
     .controller('CollectionController', ['AlbumService', CollectionController])
-    .controller('AlbumController', ['$stateParams', 'AlbumService', 'Utilities', AlbumController])
+    .controller('AlbumController', ['$stateParams', 'AlbumService', 'AudioService', 'Utilities', AlbumController])
     .directive('playerBar', function() {
       return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: '/templates/player_bar.html',
-        controller: ['$scope', PlayerBarController]
-      };
-    })
-    .directive('audioPlayer', function() {
-      return {
-        restrict: 'A',
-        controller: ['$scope', AudioPlayer]
+        controller: ['$scope', '$interval', 'AudioService', PlayerBarController],
+        controllerAs: 'PlayerBarCtrl'
       };
     });
 

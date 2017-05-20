@@ -1,27 +1,29 @@
-<section class="player-bar" ng-class="{ active: AlbumCtrl.currentSongIndex !== -1 }">
-  <button class="close ion-close clear-style" ng-click="AlbumCtrl.changeSong()"></button>
-  <div class="container">
-    <div class="control-group main-controls">
-      <div class="button-group">
-        <button class="previous clear-style ion-skip-backward" ng-click="AlbumCtrl.changeSong(AlbumCtrl.currentSongIndex-1)"></button>
-        <button class="play-pause clear-style" ng-class="AlbumCtrl.playing ? 'ion-pause' : 'ion-play'" ng-click="AlbumCtrl.playing = !AlbumCtrl.playing"></button>
-        <button class="next clear-style ion-skip-forward" ng-click="AlbumCtrl.changeSong(AlbumCtrl.currentSongIndex+1)"></button>
-      </div>
-    </div>
-    <div ng-if="AlbumCtrl.currentSongIndex >= 0" ng-init="song = AlbumCtrl.songs[AlbumCtrl.currentSongIndex]" class="control-group currently-playing">
-      <h2 class="song-name">{{song.title}}</h2>
-      <div class="seek-control">
-        <input type="range" id="seek-bar" min="0" max="3:30" step="0.25"/>
-        <div class="current-time">1:37</div>
-        <div class="total-time">{{song.duration}}</div>
-      </div>
-      <h2 class="artist-song-mobile">{{song.title}} - {{song.artist}}</h2>
-      <h3 class="artist-name">{{song.artist}}</h3>
-    </div>
-    <div class="control-group volume">
-      <input id="volume" type="range" class="volume" min="0" max="10" step="1" />
-      <span class="ion-volume-high icon"></span>
+
+<button class="close ion-close clear-style" ng-click="PlayerBarCtrl.AudioService.cleanUp()"></button>
+<div class="container">
+  <div class="control-group main-controls">
+    <div class="button-group">
+      <button class="previous clear-style ion-skip-backward" ng-click="PlayerBarCtrl.AudioService.changeSong({adjust: -1})"></button>
+      <button class="play-pause clear-style" ng-class="PlayerBarCtrl.AudioService.player.isPaused() ? 'ion-play' : 'ion-pause'" ng-click="PlayerBarCtrl.AudioService.player.togglePlay()"></button>
+      <button class="next clear-style ion-skip-forward" ng-click="PlayerBarCtrl.AudioService.changeSong({adjust: 1})"></button>
     </div>
   </div>
-  <audio class="audio-player" audio-player></audio>
-</section>
+  <div ng-if="AlbumCtrl.AudioService.currentSong" class="control-group currently-playing">
+    <h2 class="song-name">{{PlayerBarCtrl.AudioService.currentSong.title}}</h2>
+    <div class="seek-control">
+      <input id="seek-bar" type="range" ng-model="PlayerBarCtrl.AudioService.position" step="0.25" min="0" max="{{PlayerBarCtrl.AudioService.durationSeconds}}"/>
+      <div class="current-time">{{PlayerBarCtrl.AudioService.position}}</div>
+      <div class="total-time">{{PlayerBarCtrl.AudioService.currentSong.duration}}</div>
+    </div>
+    <h2 class="artist-song-mobile">{{PlayerBarCtrl.AudioService.currentSong.title}} - {{PlayerBarCtrl.AudioService.currentSong.artist}}</h2>
+    <h3 class="artist-name">{{PlayerBarCtrl.AudioService.currentSong.artist || AlbumCtrl.artist}}</h3>
+  </div>
+  <div class="control-group volume">
+    <input id="volume" type="range" ng-model="PlayerBarCtrl.AudioService.volume" ng-change="PlayerBarCtrl.AudioService.player.setVolume(PlayerBarCtrl.AudioService.volume)" class="volume" min="0" max="10" step="1" />
+    <span class="icon volume-icon" ng-class="(PlayerBarCtrl.AudioService.volume < 1 ? 'ion-volume-mute' : (PlayerBarCtrl.AudioService.volume < 3 ? ' ion-volume-low' : (PlayerBarCtrl.AudioService.volume < 7 ? ' ion-volume-medium' : ' ion-volume-high')))"></span>
+    <div class="volume-number">
+      <span>{{PlayerBarCtrl.AudioService.volume}}</span>
+    </div>
+  </div>
+</div>
+<audio class="audio-player" audio-player></audio>

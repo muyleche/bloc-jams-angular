@@ -104,6 +104,7 @@ class Utilities {
    * @return {String}
    */
   secondsToDurationString(seconds) {
-    return Math.floor(seconds/60)+':'+numberPadLeft(Math.round(seconds)%60,2)
+    console.log('seconds: ', seconds);
+    return Math.floor(seconds/60)+':'+this.numberPadLeft(Math.round(seconds)%60,2)
   }
 }

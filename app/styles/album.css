@@ -159,6 +159,11 @@ button.album-song-button:hover {
   position: relative;
 }
 
+.audio-player,
+.plyr {
+  display: none;
+}
+
 .sound-bars {
   display: none;
   position: absolute;
@@ -169,7 +174,7 @@ button.album-song-button:hover {
   transform: rotateZ(180deg) translateY(75%);
 }
 
-.playing.selected .sound-bars {
+.playing .selected .sound-bars {
   display: block;
 }
 

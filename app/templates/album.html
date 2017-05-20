@@ -9,7 +9,7 @@
       <h5 class="album-view-release-info">{{AlbumCtrl.label}}</h5>
     </div>
   </section>
-  <table class="album-view-song-list">
+  <table class="album-view-song-list" ng-class="{'playing': !AlbumCtrl.AudioService.player.isPaused()}">
     <thead>
       <tr>
         <td class="song-item-number">#</td>
@@ -19,9 +19,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="song in AlbumCtrl.songs track by $index" ng-class="{'playing': (AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing), 'selected': AlbumCtrl.currentSongIndex === $index}" class="album-view-song-item" data-song-index="{{$index}}">
+      <tr ng-repeat="song in AlbumCtrl.songs track by $index" ng-class="{'selected': AlbumCtrl.AudioService.currentSong === song}" class="album-view-song-item" data-song-index="{{$index}}">
         <td class="song-item-number" data-song-number="{{$index+1}}">
-          <button class="album-song-button clear-style" ng-class="AlbumCtrl.currentSongIndex === $index && AlbumCtrl.playing ? 'ion-stop' : 'ion-play'" ng-click="AlbumCtrl.selectSong($event)"></button>
+          <button class="album-song-button clear-style" ng-class="AlbumCtrl.AudioService.currentSong === song && !AlbumCtrl.AudioService.player.isPaused() ? 'ion-stop' : 'ion-play'" ng-click="AlbumCtrl.AudioService.changeSong({song})"></button>
         </td>
         <td class="song-item-title">
           {{song.title}}
@@ -38,4 +38,6 @@
     </tbody>
   </table>
 </main>
-<player-bar></player-bar>
+<section player-bar ng-class="{ active: AlbumCtrl.AudioService.currentSong }">
+</section>
+<audio class="audio-player"></audio>
