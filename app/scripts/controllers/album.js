@@ -14,5 +14,4 @@ function AlbumController($stateParams, AlbumService, AudioService, Utilities) {
     },
     AlbumService.getAlbum(albumIndex)
   );
-  this.AudioService.setup(this.songs);
 }

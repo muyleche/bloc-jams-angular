@@ -43,13 +43,14 @@
     .service('Utilities', Utilities)
     .service('AlbumService', AlbumService)
     .service('AudioService', ['Utilities', AudioService])
-    .filter('secondsToDuration', secondsToDuration)
     .controller('LandingController', ['Utilities', LandingController])
     .controller('CollectionController', ['AlbumService', CollectionController])
     .controller('AlbumController', ['$stateParams', 'AlbumService', 'AudioService', 'Utilities', AlbumController])
     .directive('playerBar', function() {
       return {
         restrict: 'EA',
+        scope: { songs: "=" },
+        link: PlayerBarLink,
         templateUrl: '/templates/player_bar.html',
         controller: ['$scope', '$interval', 'AudioService', PlayerBarController],
         controllerAs: 'PlayerBarCtrl'

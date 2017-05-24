@@ -3,16 +3,16 @@
 <div class="container">
   <div class="control-group main-controls">
     <div class="button-group">
-      <button class="previous clear-style ion-skip-backward" ng-click="PlayerBarCtrl.AudioService.changeSong({adjust: -1})"></button>
+      <button class="previous clear-style ion-skip-backward" ng-click="PlayerBarCtrl.AudioService.changeSong(songs[song.indexOf(PlayerBarCtrl.AudioService.currentSong)-1])"></button>
       <button class="play-pause clear-style" ng-class="PlayerBarCtrl.AudioService.player.isPaused() ? 'ion-play' : 'ion-pause'" ng-click="PlayerBarCtrl.AudioService.player.togglePlay()"></button>
-      <button class="next clear-style ion-skip-forward" ng-click="PlayerBarCtrl.AudioService.changeSong({adjust: 1})"></button>
+      <button class="next clear-style ion-skip-forward" ng-click="PlayerBarCtrl.AudioService.changeSong(songs[song.indexOf(PlayerBarCtrl.AudioService.currentSong)+1%songs.length])"></button>
     </div>
   </div>
-  <div ng-if="AlbumCtrl.AudioService.currentSong" class="control-group currently-playing">
+  <div class="control-group currently-playing">
     <h2 class="song-name">{{PlayerBarCtrl.AudioService.currentSong.title}}</h2>
     <div class="seek-control">
-      <input id="seek-bar" type="range" ng-model="PlayerBarCtrl.AudioService.position" step="0.25" min="0" max="{{PlayerBarCtrl.AudioService.durationSeconds}}"/>
-      <div class="current-time">{{PlayerBarCtrl.AudioService.position}}</div>
+      <input id="seek-bar" type="range" ng-model="PlayerBarCtrl.AudioService.position" step="0" min="0" max="{{PlayerBarCtrl.AudioService.durationSeconds}}" ng-change="PlayerBarCtrl.seekHandler(PlayerBarCtrl.AudioService.position)" />
+      <div class="current-time">{{PlayerBarCtrl.AudioService.Utilities.secondsToDurationString(PlayerBarCtrl.AudioService.position)}}</div>
       <div class="total-time">{{PlayerBarCtrl.AudioService.currentSong.duration}}</div>
     </div>
     <h2 class="artist-song-mobile">{{PlayerBarCtrl.AudioService.currentSong.title}} - {{PlayerBarCtrl.AudioService.currentSong.artist}}</h2>
