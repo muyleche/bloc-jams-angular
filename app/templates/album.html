@@ -21,7 +21,7 @@
     <tbody>
       <tr ng-repeat="song in AlbumCtrl.songs track by $index" ng-class="{'selected': AlbumCtrl.AudioService.currentSong === song}" class="album-view-song-item" data-song-index="{{$index}}">
         <td class="song-item-number" data-song-number="{{$index+1}}">
-          <button class="album-song-button clear-style" ng-class="AlbumCtrl.AudioService.currentSong === song && !AlbumCtrl.AudioService.player.isPaused() ? 'ion-stop' : 'ion-play'" ng-click="AlbumCtrl.AudioService.changeSong({song})"></button>
+          <button class="album-song-button clear-style" ng-class="AlbumCtrl.AudioService.currentSong === song && !AlbumCtrl.AudioService.player.isPaused() ? 'ion-stop' : 'ion-play'" ng-click="AlbumCtrl.AudioService.changeSong(song)"></button>
         </td>
         <td class="song-item-title">
           {{song.title}}

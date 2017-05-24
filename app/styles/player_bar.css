@@ -50,6 +50,10 @@ section[player-bar] .main-controls .button-group {
   justify-content: center;
 }
 
+section[player-bar] .main-controls button[disabled] {
+  color: gray;
+}
+
 section[player-bar] .main-controls .previous {
   margin-right: 16.5%;
 }

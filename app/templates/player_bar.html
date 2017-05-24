@@ -1,17 +1,17 @@
 
-<button class="close ion-close clear-style" ng-click="PlayerBarCtrl.AudioService.cleanUp()"></button>
+<button class="close ion-close clear-style" ng-click="PlayerBarCtrl.AudioService.changeSong()"></button>
 <div class="container">
   <div class="control-group main-controls">
     <div class="button-group">
-      <button class="previous clear-style ion-skip-backward" ng-click="PlayerBarCtrl.AudioService.changeSong(songs[song.indexOf(PlayerBarCtrl.AudioService.currentSong)-1])"></button>
+      <button class="previous clear-style ion-skip-backward" ng-click="PlayerBarCtrl.AudioService.changeSong(songs[songs.indexOf(PlayerBarCtrl.AudioService.currentSong)-1])" ng-disabled="songs.indexOf(PlayerBarCtrl.AudioService.currentSong) <= 0"></button>
       <button class="play-pause clear-style" ng-class="PlayerBarCtrl.AudioService.player.isPaused() ? 'ion-play' : 'ion-pause'" ng-click="PlayerBarCtrl.AudioService.player.togglePlay()"></button>
-      <button class="next clear-style ion-skip-forward" ng-click="PlayerBarCtrl.AudioService.changeSong(songs[song.indexOf(PlayerBarCtrl.AudioService.currentSong)+1%songs.length])"></button>
+      <button class="next clear-style ion-skip-forward" ng-click="PlayerBarCtrl.AudioService.changeSong(songs[songs.indexOf(PlayerBarCtrl.AudioService.currentSong)+1])"  ng-disabled="songs.indexOf(PlayerBarCtrl.AudioService.currentSong)+1 >= songs.length"></button>
     </div>
   </div>
   <div class="control-group currently-playing">
     <h2 class="song-name">{{PlayerBarCtrl.AudioService.currentSong.title}}</h2>
     <div class="seek-control">
-      <input id="seek-bar" type="range" ng-model="PlayerBarCtrl.AudioService.position" step="0" min="0" max="{{PlayerBarCtrl.AudioService.durationSeconds}}" ng-change="PlayerBarCtrl.seekHandler(PlayerBarCtrl.AudioService.position)" />
+      <input id="seek-bar" type="range" on-seek-change ng-model="PlayerBarCtrl.AudioService.position" step="0" min="0" max="{{PlayerBarCtrl.AudioService.durationSeconds}}"/>
       <div class="current-time">{{PlayerBarCtrl.AudioService.Utilities.secondsToDurationString(PlayerBarCtrl.AudioService.position)}}</div>
       <div class="total-time">{{PlayerBarCtrl.AudioService.currentSong.duration}}</div>
     </div>

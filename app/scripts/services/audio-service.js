@@ -4,7 +4,6 @@
 class AudioService {
   constructor(Utilities) {
     this.Utilities = Utilities;
-    this.playing = false;
     this.position = 0;
     this.volume = 5;
     this.currentSong = null;
@@ -42,17 +41,21 @@ class AudioService {
 
   /**
    * Function to change the currently playing song.
-   * @param  {Number}  [index=-1]   The currently playing song.
+   * @param  {Song} song The currently playing song.
    */
-  changeSong(options = {song: null, adjust: null}) {
-    // update currentSong and 'playing' state.
-    if (options.song != null)
-      this.currentSong = options.song;
-    else
+  changeSong(song) {
+    if (!song || song === this.currentSong && !this.player.isPaused()) {
+      // if no song provided or you clicked the stop button, null song and stop player.
       this.currentSong = null;
-    // if you played a valid song, increment playCount and change plyr source.
-    if (this.currentSong) {
-      if (!this.player) { this.setup(); }
+      this.player.pause();
+    }
+    else if (song === this.currentSong && this.player.isPaused()) {
+      // if the song hasn't changed and you just hid play, play song.
+      this.player.play();
+    }
+    else {
+      // if you played a valid song, increment playCount and change plyr source.
+      this.currentSong = song;
       this.durationSeconds = this.Utilities.durationStringToSeconds(this.currentSong.duration);
       this.currentSong.playCount++;
       this.player.source(this.plyrSongFromJsonSong(this.currentSong));
@@ -60,5 +63,6 @@ class AudioService {
       this.position = 0;
       this.player.play();
     }
+
   }
 }
