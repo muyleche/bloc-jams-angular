@@ -12,11 +12,11 @@
     <h2 class="song-name">{{PlayerBarCtrl.AudioService.currentSong.title}}</h2>
     <div class="seek-control">
       <input id="seek-bar" type="range" on-seek-change ng-model="PlayerBarCtrl.AudioService.position" step="0" min="0" max="{{PlayerBarCtrl.AudioService.durationSeconds}}"/>
-      <div class="current-time">{{PlayerBarCtrl.AudioService.Utilities.secondsToDurationString(PlayerBarCtrl.AudioService.position)}}</div>
+      <div class="current-time">{{PlayerBarCtrl.Utilities.secondsToDurationString(PlayerBarCtrl.AudioService.position)}}</div>
       <div class="total-time">{{PlayerBarCtrl.AudioService.currentSong.duration}}</div>
     </div>
-    <h2 class="artist-song-mobile">{{PlayerBarCtrl.AudioService.currentSong.title}} - {{PlayerBarCtrl.AudioService.currentSong.artist}}</h2>
-    <h3 class="artist-name">{{PlayerBarCtrl.AudioService.currentSong.artist || AlbumCtrl.artist}}</h3>
+    <h2 class="artist-song-mobile">{{PlayerBarCtrl.AudioService.currentSong.title}} - {{PlayerBarCtrl.AudioService.currentSong.artist || artist}}</h2>
+    <h3 class="artist-name">{{PlayerBarCtrl.AudioService.currentSong.artist || artist}}</h3>
   </div>
   <div class="control-group volume">
     <input id="volume" type="range" ng-model="PlayerBarCtrl.AudioService.volume" ng-change="PlayerBarCtrl.AudioService.player.setVolume(PlayerBarCtrl.AudioService.volume)" class="volume" min="0" max="10" step="1" />

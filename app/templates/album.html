@@ -25,12 +25,7 @@
         </td>
         <td class="song-item-title">
           {{song.title}}
-          <div class="sound-bars">
-            <div class="bar bar1"></div>
-            <div class="bar bar2"></div>
-            <div class="bar bar3"></div>
-            <div class="bar bar4"></div>
-          </div>
+          <div class="sound-bars"></div>
         </td>
         <td class="song-item-duration">{{song.duration}}</td>
         <td class="song-item-play-count">{{song.playCount}}</td>
@@ -38,6 +33,5 @@
     </tbody>
   </table>
 </main>
-<section player-bar songs="AlbumCtrl.songs" ng-class="{ active: AlbumCtrl.AudioService.currentSong }">
-</section>
+<section player-bar songs="AlbumCtrl.songs" artist="AlbumCtrl.artist" ng-class="{ active: AlbumCtrl.AudioService.currentSong }"></section>
 <audio class="audio-player"></audio>

@@ -36,50 +36,8 @@
       });
   }
 
-  // define primary angular module, config, and controllers/services.
+  // define primary angular module and config.
   angular
     .module('blocJams', ['ui.router'])
-    .config(config)
-    .service('Utilities', Utilities)
-    .service('AlbumService', AlbumService)
-    .service('AudioService', ['Utilities', AudioService])
-    .controller('LandingController', ['Utilities', LandingController])
-    .controller('CollectionController', ['AlbumService', CollectionController])
-    .controller('AlbumController', ['$stateParams', 'AlbumService', 'AudioService', 'Utilities', AlbumController])
-    .directive('playerBar', ['AudioService', function(AudioService) {
-      return {
-        restrict: 'EA',
-        scope: { songs: '=' },
-        link: function (scope, element, attrs, Ctrl) {
-            AudioService.setup();
-            document.addEventListener('timeupdate', Ctrl.positionUpdater);
-            //scope.$destroy(() => {document.removeEventListener('timeupdate', Ctrl.positionUpdater);});
-        },
-        templateUrl: '/templates/player_bar.html',
-        controller: ['$scope', 'AudioService', PlayerBarController],
-        controllerAs: 'PlayerBarCtrl'
-      };
-    }])
-    .directive('onSeekChange', ['AudioService', function (AudioService) {
-      return {
-        require: '^^playerBar',
-        restrict: 'A',
-        scope: {},
-        link: function (scope, element, attrs, Ctrl) {
-         element.on('mousedown mouseup input', function(event) {
-           if (event.type === 'mousedown') {
-             document.removeEventListener('timeupdate', Ctrl.positionUpdater);
-           }
-           else if (event.type === 'mouseup') {
-             document.addEventListener('timeupdate', Ctrl.positionUpdater);
-           }
-           else {
-             AudioService.position = parseFloat(event.target.value, 10);
-             AudioService.player.seek(AudioService.position);
-           }
-         });
-       }
-      };
-    }]);
-
+    .config(config);
 })();
