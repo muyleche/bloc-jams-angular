@@ -70,6 +70,17 @@
           transition-delay: 0.2s;
 }
 
+.visible-points .point {
+  opacity: 1;
+  -webkit-transform: scaleX(1) translateY(0);
+      -ms-transform: scaleX(1) translateY(0);
+          transform: scaleX(1) translateY(0);
+}
+
+.visible-points .arrow {
+  opacity: 0;
+}
+
 .point .point-title {
   font-size: 1.25rem;
 }

@@ -4,6 +4,10 @@
    * @param  {AlbumService} AlbumService
    */
   function CollectionController(AlbumService) {
+    /**
+     * All the album objects for the collections page.
+     * @type {Array<Object>}
+     */
     this.albums = AlbumService.getAlbum();
   }
   angular.module('blocJams')

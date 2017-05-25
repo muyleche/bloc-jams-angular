@@ -67,7 +67,7 @@
      * @param {...DOMelements}  elements
      */
     addClass(classToAdd, ...elements) {
-      forEach(elements, (element) => {
+      this.forEach(elements, (element) => {
         if (element && element.className.indexOf(classToAdd) < 0)
           element.className += ` ${classToAdd}`;
         else if (!element)
@@ -81,7 +81,7 @@
      * @param {...DOMelements}  elements
      */
     removeClass(classToRemove, ...elements) {
-      forEach(elements, (element) => {
+      this.forEach(elements, (element) => {
         if (element)
           element.className = element.className.replace(RegExp(classToRemove,'g'), '').trim();
         else
@@ -90,7 +90,7 @@
     }
 
     /**
-     * Return the total number of seconds represented by the provided duration string with format: mm:ss.secondsToDurationString
+     * Return the total number of seconds represented by the provided duration string with format: mm:ss.SSS.
      * @param  {String} str
      * @return {Number}
      */

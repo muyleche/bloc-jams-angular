@@ -5,11 +5,19 @@
   class AudioService {
     constructor() {
       /**
-       * @type {number}
-       * @desc The current playback
+       * The current playback position of the audio.
+       * @type {Number}
        */
       this.position = 0;
+      /**
+       * The current volume of the audio.
+       * @type {Number}
+       */
       this.volume = 5;
+      /**
+       * The currently playing song object.
+       * @type {Object}
+       */
       this.currentSong = null;
     }
 
@@ -24,9 +32,9 @@
     }
 
     /**
-     * @function Returns a 'source' object that plyr.source() expects.
-     * @param  {object} song JSON object representing the song to set as the plyr source.
-     * @return {object} plyr array of songs for the .source() method.
+     * Returns a 'source' object that plyr.source() expects.
+     * @param  {Object} song JSON object representing the song to set as the plyr source.
+     * @return {Object} plyr array of songs for the .source() method.
      */
     plyrSongFromJsonSong(song) {
       if (song.file) {
@@ -44,7 +52,7 @@
 
     /**
      * Function to change the currently playing song.
-     * @param  {object} song The currently playing song.
+     * @param  {Object} song The currently playing song.
      */
     changeSong(song) {
       if (!song || song === this.currentSong && !this.player.isPaused()) {
