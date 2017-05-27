@@ -9,14 +9,13 @@
      * Updates this service's "position" attribute as the plyr audio plays.
      */
     this.positionUpdater = function() {
-      AudioService.position = AudioService.player && (AudioService.player.getCurrentTime() || 0);
-      $scope.$apply();
+      $scope.$apply(AudioService.position = AudioService.player && (AudioService.player.getCurrentTime() || 0));
     };
 
-    $scope.$watch(() => AudioService.currentSong,
-      () => {
-        $scope.currentSongIndex = $scope.songs.indexOf(AudioService.currentSong);
-      });
+    $scope.$watch(
+      () => AudioService.currentSong,
+      () => $scope.currentSongIndex = $scope.songs.indexOf(AudioService.currentSong)
+    );
   }
 
   angular.module('blocJams')
@@ -38,6 +37,7 @@
 
           angular.element($window).on('timeupdate', Ctrl.positionUpdater);
           scope.$on('$destroy', () => {
+            AudioService.changeSong();
             AudioService.player.destroy();
             angular.element($window).off('timeupdate', Ctrl.positionUpdater);
           });
