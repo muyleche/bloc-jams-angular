@@ -5,7 +5,6 @@
    * @param {AudioService}  AudioService
    */
   function PlayerBarController($scope, AudioService) {
-
     /**
      * Updates this service's "position" attribute as the plyr audio plays.
      */
@@ -23,7 +22,8 @@
   angular.module('blocJams')
     .directive('playerBar', ['$window', 'AudioService', 'Utilities', function($window, AudioService, Utilities) {
       return {
-        restrict: 'A',
+        restrict: 'EA',
+        replace: true,
         scope: {
           songs: '=',
           artist: '='
