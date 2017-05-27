@@ -100,12 +100,17 @@ section[player-bar] .currently-playing .artist-song-mobile {
   display: none;
 }
 
-.seek-control {
+section[player-bar] .audio-player,
+section[player-bar] .plyr {
+  display: none;
+}
+
+section[player-bar] .seek-control {
   position: relative;
   font-size: 0.8rem;
 }
 
-.seek-control .current-time,
+section[player-bar] .seek-control .current-time,
 .seek-control .total-time {
   position: absolute;
   top: 1rem;

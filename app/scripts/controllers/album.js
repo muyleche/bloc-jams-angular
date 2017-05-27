@@ -7,7 +7,9 @@
    */
   function AlbumController($stateParams, AlbumService, AudioService) {
     const albumIndex = $stateParams.id;
-    Object.assign(this,{ AudioService },AlbumService.getAlbum(albumIndex));
+
+    // assign the AudioService and album info to the scope.
+    Object.assign(this,{ AudioService },AlbumService.getAlbums(albumIndex));
   }
 
   angular.module('blocJams')

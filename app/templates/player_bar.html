@@ -1,29 +1,29 @@
 
-<button class="close ion-close clear-style" ng-click="PlayerBarCtrl.AudioService.changeSong()"></button>
+<button class="close ion-close clear-style" ng-click="AudioService.changeSong()"></button>
 <div class="container">
   <div class="control-group main-controls">
     <div class="button-group">
-      <button class="previous clear-style ion-skip-backward" ng-click="PlayerBarCtrl.AudioService.changeSong(songs[songs.indexOf(PlayerBarCtrl.AudioService.currentSong)-1])" ng-disabled="songs.indexOf(PlayerBarCtrl.AudioService.currentSong) <= 0"></button>
-      <button class="play-pause clear-style" ng-class="PlayerBarCtrl.AudioService.player.isPaused() ? 'ion-play' : 'ion-pause'" ng-click="PlayerBarCtrl.AudioService.player.togglePlay()"></button>
-      <button class="next clear-style ion-skip-forward" ng-click="PlayerBarCtrl.AudioService.changeSong(songs[songs.indexOf(PlayerBarCtrl.AudioService.currentSong)+1])"  ng-disabled="songs.indexOf(PlayerBarCtrl.AudioService.currentSong)+1 >= songs.length"></button>
+      <button class="previous clear-style ion-skip-backward" ng-click="AudioService.changeSong(songs[currentSongIndex-1])" ng-disabled="currentSongIndex <= 0"></button>
+      <button class="play-pause clear-style" ng-class="AudioService.player.isPaused() ? 'ion-play' : 'ion-pause'" ng-click="AudioService.player.togglePlay()"></button>
+      <button class="next clear-style ion-skip-forward" ng-click="AudioService.changeSong(songs[currentSongIndex+1])"  ng-disabled="currentSongIndex+1 >= songs.length"></button>
     </div>
   </div>
   <div class="control-group currently-playing">
-    <h2 class="song-name">{{PlayerBarCtrl.AudioService.currentSong.title}}</h2>
+    <h2 class="song-name">{{AudioService.currentSong.title || "Unknown"}}</h2>
     <div class="seek-control">
-      <input id="seek-bar" type="range" on-seek-change ng-model="PlayerBarCtrl.AudioService.position" step="0" min="0" max="{{PlayerBarCtrl.AudioService.durationSeconds}}"/>
-      <div class="current-time">{{PlayerBarCtrl.Utilities.secondsToDurationString(PlayerBarCtrl.AudioService.position)}}</div>
-      <div class="total-time">{{PlayerBarCtrl.AudioService.currentSong.duration}}</div>
+      <input id="seek-bar" type="range" on-seek-change ng-model="AudioService.position" step="0" min="0" max="{{AudioService.durationSeconds}}"/>
+      <div class="current-time">{{Utilities.secondsToDurationString(AudioService.position)}}</div>
+      <div class="total-time">{{AudioService.currentSong.duration}}</div>
     </div>
-    <h2 class="artist-song-mobile">{{PlayerBarCtrl.AudioService.currentSong.title}} - {{PlayerBarCtrl.AudioService.currentSong.artist || artist}}</h2>
-    <h3 class="artist-name">{{PlayerBarCtrl.AudioService.currentSong.artist || artist}}</h3>
+    <h2 class="artist-song-mobile">{{AudioService.currentSong.title || "Unknown"}} - {{AudioService.currentSong.artist || artist}}</h2>
+    <h3 class="artist-name">{{AudioService.currentSong.artist || artist}}</h3>
   </div>
   <div class="control-group volume">
-    <input id="volume" type="range" ng-model="PlayerBarCtrl.AudioService.volume" ng-change="PlayerBarCtrl.AudioService.player.setVolume(PlayerBarCtrl.AudioService.volume)" class="volume" min="0" max="10" step="1" />
-    <span class="icon volume-icon" ng-class="(PlayerBarCtrl.AudioService.volume < 1 ? 'ion-volume-mute' : (PlayerBarCtrl.AudioService.volume < 3 ? ' ion-volume-low' : (PlayerBarCtrl.AudioService.volume < 7 ? ' ion-volume-medium' : ' ion-volume-high')))"></span>
+    <input id="volume" type="range" ng-model="AudioService.volume" ng-change="AudioService.player.setVolume(AudioService.volume)" class="volume" min="0" max="10" step="1" />
+    <span class="icon volume-icon" ng-class="(AudioService.volume < 1 ? 'ion-volume-mute' : (AudioService.volume < 3 ? ' ion-volume-low' : (AudioService.volume < 7 ? ' ion-volume-medium' : ' ion-volume-high')))"></span>
     <div class="volume-number">
-      <span>{{PlayerBarCtrl.AudioService.volume}}</span>
+      <span>{{AudioService.volume}}</span>
     </div>
   </div>
 </div>
-<audio class="audio-player" audio-player></audio>
+<audio class="audio-player"></audio>

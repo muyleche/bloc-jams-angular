@@ -159,11 +159,6 @@ button.album-song-button:hover {
   position: relative;
 }
 
-.audio-player,
-.plyr {
-  display: none;
-}
-
 .sound-bars {
   display: none;
   position: absolute;

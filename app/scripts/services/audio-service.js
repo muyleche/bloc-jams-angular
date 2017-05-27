@@ -23,31 +23,27 @@
 
     /**
      * instantiate the plyr audio object.
-     * @param {element | selector | array of elements}  element  The selector or HTML element(s) to be converted to plyr instances.
+     * @param {plyrObject}  player  The plyr instance you will use with this service.
      */
-    setup(element = '.audio-player') {
-      if (!this.player) {
-        this.player = plyr.setup(element, { debug: false })[0];
-      }
+    setup(player) {
+      if (player) this.player = player;
     }
 
     /**
      * Returns a 'source' object that plyr.source() expects.
      * @param  {Object} song JSON object representing the song to set as the plyr source.
-     * @return {Object} plyr array of songs for the .source() method.
+     * @return {Object} plyr-structured object for the .source() method.
      */
-    plyrSongFromJsonSong(song) {
-      if (song.file) {
-        return {
-          type: 'audio',
-          title: song.title,
-          sources: [{
-            src: "/assets/music/" + encodeURI(song.file),
-            type: song.fileType || "audio/mp3"
+    plyrSongFromJsonSong(song = { file, fileType:"audio/mp3", title:"Unknown"}) {
+      if (!song.file) return {};
+      return {
+        type: 'audio',
+        title: song.title,
+        sources: [{
+          src: encodeURI(song.file),
+          type: song.fileType
           }]
-        };
-      }
-      return {};
+      };
     }
 
     /**
@@ -61,7 +57,7 @@
         song = null;
       }
       else if (song === this.currentSong && this.player.isPaused()) {
-        // if the song hasn't changed and you just hid play, play song.
+        // if the song hasn't changed and you just hit play, play song.
         this.player.play();
       }
       else {

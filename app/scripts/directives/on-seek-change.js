@@ -1,6 +1,6 @@
 (function() {
   angular.module('blocJams')
-    .directive('onSeekChange', ['AudioService', function (AudioService) {
+    .directive('onSeekChange', ['$window', 'AudioService', function ($window, AudioService) {
       return {
         require: '^^playerBar',
         restrict: 'A',
@@ -8,10 +8,10 @@
         link: function (scope, element, attrs, Ctrl) {
          element.on('mousedown mouseup input', function(event) {
            if (event.type === 'mousedown') {
-             document.removeEventListener('timeupdate', Ctrl.positionUpdater);
+             angular.element($window).off('timeupdate', Ctrl.positionUpdater);
            }
            else if (event.type === 'mouseup') {
-             document.addEventListener('timeupdate', Ctrl.positionUpdater);
+             angular.element($window).on('timeupdate', Ctrl.positionUpdater);
            }
            else {
              AudioService.position = parseFloat(event.target.value, 10);
