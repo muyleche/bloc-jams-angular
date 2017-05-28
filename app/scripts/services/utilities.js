@@ -94,7 +94,7 @@
      * @param  {String} str
      * @return {Number}
      */
-    durationStringToSeconds(str) {
+    durationStringToSeconds(str = "0:00") {
       return (str ? parseInt(str.split(':')[0],10) : 0)*60
             +(str ? parseInt(str.split(':')[1],10) : 0);
     }
@@ -104,7 +104,7 @@
      * @param  {Number} str
      * @return {String}
      */
-    secondsToDurationString(seconds) {
+    secondsToDurationString(seconds = 0) {
       return Math.floor(seconds/60)+':'+this.numberPadLeft(Math.round(seconds)%60,2)
     }
   }
