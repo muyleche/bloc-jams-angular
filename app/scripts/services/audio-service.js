@@ -3,7 +3,7 @@
    * Service class providing functionality for audio playback.
    */
   class AudioService {
-    constructor() {
+    constructor($rootScope) {
       /**
        * The current playback position of the audio.
        * @type {Number}
@@ -19,14 +19,33 @@
        * @type {Object}
        */
       this.currentSong = null;
+      /**
+       * Whether or not the user is currently seeking the song's playback position.
+       * @type {Boolean}
+       */
+      this.seeking = false;
+
+      /**
+       * Function that udpates the 'position' attribute according to the plyr instance's getCurrentTime().
+       * @return {[type]} [description]
+       */
+      this.positionUpdater = () => {
+        if (!this.seeking) $rootScope.$apply(this.position = this.player && (this.player.getCurrentTime() || 0));
+      };
     }
 
     /**
      * instantiate the plyr audio object.
      * @param {plyrObject}  player  The plyr instance you will use with this service.
      */
-    setup(player) {
-      if (player) this.player = player;
+    init(player) {
+      if (!player) throw "You must provide an instance of plyr.";
+      this.player = angular.element(player)[0];
+      this.player.on('timeupdate', this.positionUpdater)
+        .on('$destroy', () => {
+          this.player.off('timeupdate', this.positionUpdater);
+          this.player.destroy();
+        });
     }
 
     /**
@@ -35,7 +54,6 @@
      * @return {Object} plyr-structured object for the .source() method.
      */
     plyrSongFromJsonSong(song = { file, fileType:"audio/mp3", title:"Unknown"}) {
-      if (!song.file) return {};
       return {
         type: 'audio',
         title: song.title,
@@ -47,28 +65,64 @@
     }
 
     /**
+     * Play the provided song. This will change the currently playing song if different.
+     * @param  {song} song JSON song object.
+     */
+    play(song) {
+      if (!this.player) throw "You have not provided an instance of plyr.";
+      if (song && this.currentSong !== song){
+        this.changeSong(song);
+      }
+      else if (this.player.isPaused()) {
+        this.player.play();
+      }
+    }
+
+    /**
+     * Pause the currently playing song.
+     */
+    pause() {
+      if (!this.player) throw "You have not provided an instance of plyr.";
+      if (this.currentSong && !this.player.isPaused())
+        this.player.pause();
+    }
+
+    /**
+     * Stop the currently playing song.
+     */
+    stop() {
+      if (!this.player) throw "You have not provided an instance of plyr.";
+      this.currentSong = null;
+      this.player.pause();
+    }
+
+    /**
+     * Change the playback position of the currently playing song.
+     * @param  {number} here the number of seconds into the song to seek to.
+     */
+    seek(here) {
+      if (!this.player) throw "You have not provided an instance of plyr.";
+      if (here) {
+        this.position = typeof here === 'number' ? here : parseFloat(here, 10);
+        this.player.seek(this.position);
+      }
+    }
+
+    /**
      * Function to change the currently playing song.
      * @param  {Object} song The currently playing song.
      */
     changeSong(song) {
-      if (!song || song === this.currentSong && !this.player.isPaused()) {
-        // if no song provided or you clicked the stop button, stop player and null song.
-        this.player.pause();
-        song = null;
-      }
-      else if (song === this.currentSong && this.player.isPaused()) {
-        // if the song hasn't changed and you just hit play, play song.
-        this.player.play();
-      }
-      else {
+      if (!this.player) throw "You have not provided an instance of plyr.";
+      if (song && this.currentSong !== song) {
         // if you played a valid song, increment playCount and change plyr source.
         song.playCount++;
         this.player.source(this.plyrSongFromJsonSong(song));
         this.player.seek(0);
+        this.currentSong = song;
         this.player.play();
       }
-      // set the currentSong.
-      this.currentSong = song;
+      else throw "You must provide a song.";
     }
   }
 
