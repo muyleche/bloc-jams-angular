@@ -18,8 +18,11 @@
     <a ui-sref="landing" class="logo">
       <img src="/assets/images/bloc_jams_logo.png" alt="bloc jams logo">
     </a>
-    <div class="links-container">
-      <a ui-sref="collection" class="navbar-link">collection</a>
+    <div class="navbar-right">
+      <song-searcher></song-searcher>
+      <div class="links-container">
+        <a ui-sref="collection" class="navbar-link">collection</a>
+      </div>
     </div>
   </nav>
 
@@ -36,6 +39,7 @@
   <script src="/scripts/directives/player-bar.js"></script>
   <script src="/scripts/directives/on-seek-change.js"></script>
   <script src="/scripts/directives/sound-bars.js"></script>
+  <script src="/scripts/directives/song-searcher.js"></script>
   <script src="/scripts/directives/selling-points.js"></script>
   <script src="/scripts/controllers/landing.js"></script>
   <script src="/scripts/controllers/collection.js"></script>

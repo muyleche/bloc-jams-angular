@@ -1,0 +1,8 @@
+<div class="song-searcher">
+  <input class="search-query" placeholder="Search songs" type="text" ng-model="songSearchCtrl.query">
+  <ul class="search-results" ng-show="songSearchCtrl.query">
+    <li class="search-result-item" ui-sref="album({ id: {{song.album}} })" data-album="{{song.album}}" ng-repeat="song in songSearchCtrl.songs | filter:songSearchCtrl.songFilter | limitTo:10">
+      {{song.title}} - {{song.artist}}
+    </li>
+  </ul>
+</div>

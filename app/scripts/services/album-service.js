@@ -57,6 +57,22 @@
       else
         return this.albums;
     }
+
+    /**
+     * [getSongs description]
+     * @return {[type]}        [description]
+     */
+    getAllSongs() {
+      let results = [];
+      this.albums.map((album, index) => {
+        album.songs.map((song) => {
+          song.album = index;
+          song.artist = song.artist || album.artist;
+          results.push(song);
+        });
+      });
+      return results;
+    }
   }
 
   angular.module('blocJams')

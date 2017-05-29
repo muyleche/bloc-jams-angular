@@ -56,7 +56,7 @@
         while (element && !element.classList.contains(className)) {
           element = element.parentElement;
         }
-        if (!element) {console.log('No parent found with class name: '+className);}
+        if (!element) console.log('No parent found with class name: '+className);
       }
       return element;
     }
@@ -87,6 +87,22 @@
         else
           console.log('Element was not found.');
       });
+    }
+
+    /**
+     * Function to find the DOM element that immediately preceeds the provided element.
+     * @param  {HTMLElement}  current
+     * @return {HTMLElement}
+     */
+    prev(current) {
+      const parent = current.parent(),
+            children = parent.children();
+      for (let i = 0; i < children.length; i++){
+        if (children[i] === current[0]) {
+          if (i === 0) return children[i];
+          return children[i-1];
+        }
+      }
     }
 
     /**
