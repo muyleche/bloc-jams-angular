@@ -38,7 +38,6 @@ server.start( onServerStarted );
 
 server.on('response', function (request) {
     if(request.url.path.includes('templates')) {
-        console.log();
         console.log(new Date().toString() + ':  ' + request.method.toUpperCase() + ' - ' + request.url.path + ' - (' + request.response.statusCode + ')');
     }
 });
