@@ -6,7 +6,7 @@
      * @param  {function(item,index)} handler the function you wish to execute on each item in the array.
      */
     forEach(array, handler) {
-      for (var i = 0; i < array.length; i++) {
+      for (let i = 0; i < array.length; i++) {
         handler(array[i], i);
       }
     }
@@ -18,7 +18,7 @@
      * @return {String}            String representing left-padded version of provided number.
      */
     numberPadLeft(number, digits = 0) {
-      var string = number.toString(),
+      let string = number.toString(),
           i;
       for (i = 0, digits -= string.length; i < digits; i++) {
         string = "0" + string;
@@ -31,7 +31,7 @@
      * @return {JSON} A JSON object representing the search query parameter on the URL.
      */
     getHtmlQueryAsJson () {
-      var query = location.search.substring(1),
+      let query = location.search.substring(1),
           params = query.split('&'),
           paramLength = params.length,
           i,

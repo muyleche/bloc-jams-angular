@@ -1,16 +1,16 @@
 {
-  "name": "bloc-frontend-project-starter",
-  "version": "0.0.3",
-  "description": "Starter project for the Bloc Frontend Web Development",
+  "name": "bloc-jams-angular",
+  "version": "1.0.1",
+  "description": "Music streaming web application",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bloc/bloc-frontend-project-starter"
+    "url": "https://github.com/tboddyspargo/bloc-jams-angular"
   },
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Bloc Inc",
+  "author": "Tyler BoddySpargo",
   "license": "ISC",
   "dependencies": {
     "hapi": "~7.5.0",
