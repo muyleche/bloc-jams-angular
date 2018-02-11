@@ -31,7 +31,7 @@
           scope.AudioService = AudioService;
           scope.Utilities = Utilities;
         },
-        templateUrl: '/templates/player_bar.html',
+        templateUrl: '/templates/player-bar.html',
         controller: ['$scope', 'AudioService', PlayerBarController],
         controllerAs: 'PlayerBarCtrl'
       };
